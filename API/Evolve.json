@@ -1,0 +1,7 @@
+{
+  "Evolve.Driver": "MySql.Data",
+  "Evolve.ConnectionString": "Server=localhost;Port=3306;Database=sgem;Uid=root;Pwd=DR&ppd3o;SslMode=none;",
+  "Evolve.Locations": "db",
+  "Evolve.Command": "migrate",
+  "Evolve.Placeholder.table4": "table_4"
+}

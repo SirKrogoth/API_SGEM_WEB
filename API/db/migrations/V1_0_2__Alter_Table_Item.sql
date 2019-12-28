@@ -1,0 +1,1 @@
+﻿ALTER TABLE Item MODIFY Codigo int not null AUTO_INCREMENT PRIMARY KEY;
