@@ -2,92 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using API.Business.Interface;
+using API.Data.VO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API
+namespace API.Controllers
 {
-    public class ItemController : Controller
+    public class ItemController : ControllerBase
     {
-        // GET: Item
-        public ActionResult Index()
+        private IItemBusiness _itemBusiness;
+
+        public ItemController(IItemBusiness itemBusiness)
         {
-            return View();
+            _itemBusiness = itemBusiness;
         }
 
-        // GET: Item/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public string Get()
         {
-            return View();
+            return "TESTE DO JOAO";
         }
 
-        // GET: Item/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Item/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Post([FromBody] ItemVO itemVO)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Item/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Item/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Item/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Item/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (itemVO == null)
+                return BadRequest();
+            else
+                return new ObjectResult(_itemBusiness.Create(itemVO));
         }
     }
 }

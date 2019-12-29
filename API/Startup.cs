@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Business.Implementation;
+using API.Business.Interface;
 using API.Model.Context;
+using API.Repository.Implementation;
+using API.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +43,9 @@ namespace API
             ExecuteMigrations(connectionString);
 
             services.AddMvc();
+
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemBusiness, ItemBusinessImpl>();
         }
 
         private void ExecuteMigrations(string connectionString)
