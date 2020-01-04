@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Business.Implementation;
 using API.Business.Interface;
 using API.Model.Context;
+using API.Repository.Generic;
 using API.Repository.Implementation;
 using API.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -42,10 +43,12 @@ namespace API
             //Executando o Migrations
             ExecuteMigrations(connectionString);
 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //Serviço de versionamento
+            services.AddApiVersioning();
 
-            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IItemBusiness, ItemBusinessImpl>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
         private void ExecuteMigrations(string connectionString)
@@ -89,7 +92,12 @@ namespace API
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller=values}/{id?}");
+            });
         }
     }
 }

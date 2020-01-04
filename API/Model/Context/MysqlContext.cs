@@ -19,6 +19,6 @@ namespace API.Model.Context
 
         }
 
-        public DbSet<Item> Itens { get; set; }
+        public DbSet<Item> Item { get; set; }
     }
 }

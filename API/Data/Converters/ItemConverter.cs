@@ -16,12 +16,12 @@ namespace API.Data.Converters
 
             return new Item
             {
-                Codigo = Convert.ToInt64(origin.Codigo),
+                Codigo = origin.Codigo,
                 Descricao = origin.Descricao,
-                Preco = Convert.ToDouble(origin.Preco),
-                Cadastro = Convert.ToDateTime(origin.Cadastro),
-                Estoque = Convert.ToDouble(origin.Estoque),
-                Ativo = Convert.ToBoolean(origin.Ativo)
+                Preco = origin.Preco,
+                Cadastro = origin.Cadastro,
+                Estoque = origin.Estoque,
+                Ativo = origin.Ativo
             };
         }
 
@@ -31,23 +31,27 @@ namespace API.Data.Converters
 
             return new ItemVO
             {
-                Codigo = Convert.ToInt64(origin.Codigo),
+                Codigo = origin.Codigo,
                 Descricao = origin.Descricao,
-                Preco = Convert.ToDouble(origin.Preco),
-                Cadastro = Convert.ToDateTime(origin.Cadastro),
-                Estoque = Convert.ToDouble(origin.Estoque),
-                Ativo = Convert.ToBoolean(origin.Ativo)
+                Preco = origin.Preco,
+                Cadastro = origin.Cadastro,
+                Estoque = origin.Estoque,
+                Ativo = origin.Ativo
             };
         }
 
         public List<Item> ParceList(List<ItemVO> origin)
         {
-            throw new NotImplementedException();
+            if (origin == null) return new List<Item>();
+
+            return origin.Select(item => Parce(item)).ToList();
         }
 
         public List<ItemVO> ParceList(List<Item> origin)
         {
-            throw new NotImplementedException();
+            if (origin == null) return new List<ItemVO>();
+
+            return origin.Select(item => Parce(item)).ToList();
         }
     }
 }

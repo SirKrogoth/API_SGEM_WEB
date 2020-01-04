@@ -9,5 +9,6 @@ namespace API.Business.Interface
     public interface IItemBusiness
     {
         ItemVO Create(ItemVO itemVO);
+        List<ItemVO> FindAll();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using API.Business.Interface;
 using API.Data.Converters;
 using API.Data.VO;
+using API.Model.Class;
 using API.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace API.Business.Implementation
 {
     public class ItemBusinessImpl : IItemBusiness
     {
-        private IItemRepository _repository;
+        private IRepository<Item> _repository;
         private readonly ItemConverter _converter;
 
-        public ItemBusinessImpl(IItemRepository repository, ItemConverter converter)
+        public ItemBusinessImpl(IRepository<Item> repository)
         {
             _repository = repository;
-            _converter = converter;
+            _converter = new ItemConverter();
         }
 
         public ItemVO Create(ItemVO itemVO)
@@ -26,6 +27,11 @@ namespace API.Business.Implementation
             itemEntity = _repository.Create(itemEntity);
 
             return _converter.Parce(itemEntity);
+        }
+
+        public List<ItemVO> FindAll()
+        {
+            return _converter.ParceList(_repository.FindAll());
         }
     }
 }
