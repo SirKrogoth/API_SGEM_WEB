@@ -9,8 +9,8 @@ namespace API.Model.Class
     public class Item : BaseEntity
     {
         public string Descricao { get; set; }
-        public double Estoque { get; set; }
-        public double Preco { get; set; }
+        public decimal Estoque { get; set; }
+        public decimal Preco { get; set; }
         public DateTime Cadastro { get; set; }
         public bool Ativo { get; set; }
     }

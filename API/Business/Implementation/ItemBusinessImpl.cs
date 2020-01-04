@@ -33,5 +33,24 @@ namespace API.Business.Implementation
         {
             return _converter.ParceList(_repository.FindAll());
         }
+
+        public ItemVO Update(ItemVO itemVO)
+        {
+            var itemEntity = _converter.Parce(itemVO);
+
+            itemEntity = _repository.Update(itemEntity);
+
+            return _converter.Parce(itemEntity);
+        }
+
+        public void Delete(long codigo)
+        {
+            _repository.Delete(codigo);
+        }
+
+        public ItemVO FindById(long codigo)
+        {
+            return _converter.Parce(_repository.FindById(codigo));
+        }
     }
 }

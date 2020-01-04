@@ -10,5 +10,8 @@ namespace API.Business.Interface
     {
         ItemVO Create(ItemVO itemVO);
         List<ItemVO> FindAll();
+        ItemVO FindById(long codigo);
+        ItemVO Update(ItemVO item);
+        void Delete(long codigo);
     }
 }

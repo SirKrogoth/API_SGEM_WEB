@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
+    //[ApiController]
     [ApiVersion("1")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class ItemController : ControllerBase
@@ -23,16 +23,21 @@ namespace API.Controllers
 
         // GET: api/Item
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_itemBusiness.FindAll());
         }
 
         // GET: api/Item/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public ActionResult Get(int codigo)
         {
-            return "value";
+            var item = _itemBusiness.FindById(codigo);
+
+            if (item == null)
+                return BadRequest();
+            else
+                return Ok(item);
         }
 
         // POST: api/Item
@@ -47,14 +52,34 @@ namespace API.Controllers
 
         // PUT: api/Item/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [ProducesResponseType((403))]
+        [ProducesResponseType((202), Type = typeof(ItemVO))]
+        public IActionResult Put([FromBody] ItemVO itemVO)
         {
+            if (itemVO == null)
+                return BadRequest();
+            else
+            {
+                var updateItem = _itemBusiness.Update(itemVO);
+
+                if (updateItem == null)
+                    return BadRequest();
+                else
+                    return new ObjectResult(updateItem);
+            }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [ProducesResponseType((403))]
+        public IActionResult Delete([FromBody] ItemVO itemVO)
         {
-        }
+            _itemBusiness.Delete(itemVO.Codigo);
+            return NoContent();
+        }        
     }
 }
