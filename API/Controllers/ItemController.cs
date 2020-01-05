@@ -23,19 +23,30 @@ namespace API.Controllers
 
         // GET: api/Item
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<ItemVO>))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [ProducesResponseType((403))]
         public ActionResult Get()
         {
             return Ok(_itemBusiness.FindAll());
         }
 
         // GET: api/Item/5
-        [HttpGet("{id}")]
-        public ActionResult Get(int codigo)
+        [HttpGet]
+        [Route("consultarItemPorCodigo/{codigo}")]
+        [ProducesResponseType((200), Type = typeof(ItemVO))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [ProducesResponseType((403))]
+        public ActionResult Get(long codigo)
         {
             var item = _itemBusiness.FindById(codigo);
 
             if (item == null)
-                return BadRequest();
+                return NotFound();
             else
                 return Ok(item);
         }
@@ -73,12 +84,13 @@ namespace API.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Route("deletarItemPorCodigo/{codigo}")]
         [ProducesResponseType((400))]
         [ProducesResponseType((401))]
         [ProducesResponseType((403))]
-        public IActionResult Delete([FromBody] ItemVO itemVO)
+        public IActionResult Delete(long codigo)
         {
-            _itemBusiness.Delete(itemVO.Codigo);
+            _itemBusiness.Delete(codigo);
             return NoContent();
         }        
     }
