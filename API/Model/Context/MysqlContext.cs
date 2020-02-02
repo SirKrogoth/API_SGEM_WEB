@@ -1,13 +1,15 @@
 ﻿using API.Model.Class;
+using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace API.Model.Context
 {
-    public class MysqlContext : DbContext
+    public class MysqlContext : DbContextWithTriggers
     {
         public MysqlContext()
         {
@@ -20,5 +22,7 @@ namespace API.Model.Context
         }
 
         public DbSet<Item> Item { get; set; }
+        public DbSet<ItemLog> ItemLog { get; set; }
+
     }
 }

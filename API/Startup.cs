@@ -8,6 +8,7 @@ using API.Model.Context;
 using API.Repository.Generic;
 using API.Repository.Implementation;
 using API.Repository.Interface;
+using EntityFrameworkCore.Triggers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -48,6 +49,7 @@ namespace API
             services.AddApiVersioning();
 
             services.AddScoped<IItemBusiness, ItemBusinessImpl>();
+            services.AddScoped<IItemLog, ItemLogRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
