@@ -12,12 +12,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Item\Models\" />
-    <Folder Include="Repository\Interface\" />
-    <Folder Include="Repository\Implementation\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

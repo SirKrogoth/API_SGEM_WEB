@@ -1,21 +1,43 @@
-﻿
+﻿@model SGEM_WEB_SITE.Areas.Item.Models.ItemObj;
+
 @{
     ViewData["Title"] = "SGEM - Cadastro de Item";
 }
 
-<h2>Cadastro de Itens</h2>
-
-<form method="post" action="">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Nome"></label>
-        <input asp-for="Nome" class="form-control" placeholder="Digite o nome do colaborador" />
-        <span asp-validation-for="Nome" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" placeholder="Digite o e-mail do colaborador" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Cadastrar Item</button>    
-</form>
+    <form method="post" class="col-6 center" style="margin-top: 5%">
+        <h2>Cadastro de Itens</h2>
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Codigo"></label>
+            <input asp-for="Codigo" class="form-control col-4" placeholder="0" disabled/>
+            <span asp-validation-for="Codigo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao">Digite aqui uma breve descrição do Item</label>
+            <input asp-for="Descricao" class="form-control" placeholder="Descrição do Item" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Estoque">Qual é a quantidade que você o possui em estoque?</label>
+            <input asp-for="Estoque" class="form-control col-4" placeholder="Estoque" />
+            <span asp-validation-for="Estoque" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Preco">Qual é o preço para locação por unidade?</label>
+            <input asp-for="Preco" class="form-control col-4" placeholder="Preço" />
+            <span asp-validation-for="Preco" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cadastro">Data em que o Item foi cadastrado!</label>
+            <input asp-for="Cadastro" class="form-control col-4" placeholder="@DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")" disabled />
+            <span asp-validation-for="Cadastro" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ativo">Situação atual do Item</label>
+            <select asp-for="Ativo" class="form-control col-4">
+                <option value="True" selected>Ativo</option>
+                <option value="False">Inativo</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar Item</button>
+    </form>

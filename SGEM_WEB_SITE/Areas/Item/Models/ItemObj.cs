@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SGEM_WEB_SITE.Models.Class
+namespace SGEM_WEB_SITE.Areas.Item.Models
 {
     public class ItemObj 
     {
         public long Codigo { get; set; }
+
         [Required]
         [MinLength(4)]
         [MaxLength(100)]

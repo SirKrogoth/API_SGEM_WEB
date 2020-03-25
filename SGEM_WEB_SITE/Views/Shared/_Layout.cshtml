@@ -2,19 +2,40 @@
 
 <html lang="pt-br">
 
-    <head>
-        <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-        <title>SGEM</title>
-        <meta name="description" content="SGEM">
-        <meta name="author" content="João Rafael">
-        <link rel="stylesheet" href="resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="resources/lib/caroussel/carousel.css" />
-        <link rel="stylesheet" href="resources/lib/bootstrap-ecommerce-uikit/css/ui.css" />
-        <link rel="stylesheet" href="resources/lib/bootstrap-ecommerce-uikit/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-              crossorigin="anonymous">
-    </head>
+    <title>SGEM</title>
+    <meta name="description" content="SGEM">
+    <meta name="author" content="João Rafael">
+    <link rel="stylesheet" href="resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/lib/caroussel/carousel.css" />
+    <link rel="stylesheet" href="resources/lib/bootstrap-ecommerce-uikit/css/ui.css" />
+    <link rel="stylesheet" href="resources/lib/bootstrap-ecommerce-uikit/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+    <!-- Custom styles for this template -->
+    <link href="./Login_files/signin.css" rel="stylesheet">
+</head>
 
     <body>
         <header>
@@ -39,6 +60,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="../../Item/Item/CadastrarItem">Cadastro de Itens</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
@@ -48,12 +70,9 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-
-
-
                         <input class="form-control mr-sm-2" type="search" placeholder="palavra" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisa</button>
-                        <a class="nav-link" href="login.html"><i class="fas fa-user-alt"></i> Login</a>
+                        <a class="nav-link" href="/Home/Login.cshtml"><i class="fas fa-user-alt"></i> Login</a>
                         <a class="nav-link" href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
                     </form>
                 </div>

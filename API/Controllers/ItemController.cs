@@ -34,6 +34,7 @@ namespace API.Controllers
         }
 
         // GET: api/Item/5
+        //http://localhost:58722/api/Item//v1/consultarItemPorCodigo/1
         [HttpGet]
         [Route("consultarItemPorCodigo/{codigo}")]
         [ProducesResponseType((200), Type = typeof(ItemVO))]
@@ -53,7 +54,7 @@ namespace API.Controllers
 
         // POST: api/Item
         [HttpPost]
-        public ActionResult Post([FromBody] ItemVO itemVO)
+        public ActionResult Post([FromBody]ItemVO itemVO)
         {
             if (itemVO == null)
                 return BadRequest();

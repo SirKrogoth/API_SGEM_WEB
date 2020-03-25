@@ -1,7 +1,39 @@
-﻿
+﻿@model SGEM_WEB_SITE.Areas.Item.Models.ItemObj;
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Cadastro de Item</h1>
 
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Model.Codigo</th>
+                <td>@Model.Descricao</td>
+                <td>
+                        @*@if(categoria.CategoriaPaiId != null)
+                            {
+                                <span>@categoria.CategoriaID.Id - @categoria.CategoriaID.Nome</span>
+                            }
+                            else
+                            {
+                                <span>--</span>
+                            }*@
+                    TESTE
+                </td>
+                @*<td>
+                    <a asp-action="Atualizar" asp-route-id="@categoria.Id" class="btn btn-secondary">Atualizar</a>
+                    <a asp-action="Excluir" asp-route-id="@categoria.Id" class="btn btn-danger">Excluir</a>
+                </td>*@
+            </tr>
+        </tbody>
+    </table>
+</div>
