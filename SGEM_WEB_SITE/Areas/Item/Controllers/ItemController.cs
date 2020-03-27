@@ -41,21 +41,25 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
                 var contentString = new StringContent(JsonConvert.SerializeObject(itemObj), System.Text.Encoding.UTF8, "application/json");
 
                 HttpResponseMessage responseMessage = await client.PostAsync($"/api/Item/v1/", contentString);
-                
-                //Verificando se item foi salvo no banco de dados
-                if(responseMessage.IsSuccessStatusCode)
-                {
-                    TempData["MSG"] = "Registro salvo com sucesso.";
 
+                //Verificando se item foi salvo no banco de dados
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    TempData["MSG_SUCESSO"] = "Registro salvo com sucesso.";
+
+                    return RedirectToAction(nameof(CadastrarItem));
+                }
+                else
+                {
+                    TempData["MSG_ERRO"] = "Não foi possível acessar base de dados. Mensagem: " + responseMessage.StatusCode.ToString();
                     return RedirectToAction(nameof(CadastrarItem));
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Falha ao inserir novo item na base de dados. Mensagem: " + e.Message);
-            }            
-
-            return View(itemObj);
+                TempData["MSG_ERRO"] = "Falha ao inserir novo item na base de dados. Mensagem: " + e.Message;
+                return RedirectToAction(nameof(CadastrarItem));
+            }
         }
 
         [HttpGet]

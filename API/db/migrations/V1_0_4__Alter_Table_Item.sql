@@ -1,0 +1,1 @@
+﻿ALTER TABLE sgem.item MODIFY COLUMN Cadastro DATE not null;

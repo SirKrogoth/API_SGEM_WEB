@@ -6,9 +6,13 @@
 
     <form method="post" class="col-6 center" style="margin-top: 5%" action="">
 
-        @if (TempData["MSG"] != null)
+        @if (TempData["MSG_SUCESSO"] != null)
         {
-            <p class="alert alert-success">@TempData["MSG"].ToString()</p>
+            <p class="alert alert-success">@TempData["MSG_SUCESSO"].ToString()</p>
+        }
+        else if(TempData["MSG_ERRO"] != null)
+        {            
+            <p class="alert alert-danger">@TempData["MSG_ERRO"].ToString()</p>
         }
 
         <h2>Cadastro de Itens</h2>

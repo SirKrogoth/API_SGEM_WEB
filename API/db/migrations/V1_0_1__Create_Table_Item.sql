@@ -3,6 +3,6 @@
     Descricao VARCHAR(100) not null,
 	Estoque Decimal(10,2) not null,
 	Preco Decimal(10,2) not null,
-	Cadastro Date not null,
+	Cadastro DateTime not null,
 	Ativo bit not null
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
