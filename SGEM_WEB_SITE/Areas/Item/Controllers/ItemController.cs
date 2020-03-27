@@ -27,15 +27,33 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarItemAsync([FromForm] Models.ItemObj itemObj)
+        public async Task<IActionResult> CadastrarItemAsync([FromForm] ItemObj itemObj)
         {
-            client.BaseAddress = new Uri("http://localhost:58722");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                //TODO - Criar uma configuração para guardar esta informação
+                client.BaseAddress = new Uri("http://localhost:58722");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            //var contentString = new StringContent(JsonConvert.SerializeObject(itemObj), System.Text.Encoding.UTF8, "application/json");
+                itemObj.Cadastro = DateTime.Today;
 
-            //HttpResponseMessage responseMessage = await client.PostAsync("/api/Item//v1/Post/", contentString);
+                var contentString = new StringContent(JsonConvert.SerializeObject(itemObj), System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage responseMessage = await client.PostAsync($"/api/Item/v1/", contentString);
+                
+                //Verificando se item foi salvo no banco de dados
+                if(responseMessage.IsSuccessStatusCode)
+                {
+                    TempData["MSG"] = "Registro salvo com sucesso.";
+
+                    return RedirectToAction(nameof(CadastrarItem));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Falha ao inserir novo item na base de dados. Mensagem: " + e.Message);
+            }            
 
             return View(itemObj);
         }

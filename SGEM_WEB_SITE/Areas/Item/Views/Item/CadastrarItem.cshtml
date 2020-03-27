@@ -4,40 +4,46 @@
     ViewData["Title"] = "SGEM - Cadastro de Item";
 }
 
-    <form method="post" class="col-6 center" style="margin-top: 5%">
+    <form method="post" class="col-6 center" style="margin-top: 5%" action="">
+
+        @if (TempData["MSG"] != null)
+        {
+            <p class="alert alert-success">@TempData["MSG"].ToString()</p>
+        }
+
         <h2>Cadastro de Itens</h2>
         <div asp-validation-summary="All"></div>
         <div class="form-group">
             <label asp-for="Codigo"></label>
-            <input asp-for="Codigo" class="form-control col-4" placeholder="0" disabled/>
+            <input asp-for="Codigo" name="Codigo" class="form-control col-4" placeholder="0" disabled />
             <span asp-validation-for="Codigo" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Descricao">Digite aqui uma breve descrição do Item</label>
-            <input asp-for="Descricao" class="form-control" placeholder="Descrição do Item" />
+            <input asp-for="Descricao" name="Descricao" class="form-control" placeholder="Descrição do Item" />
             <span asp-validation-for="Descricao" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Estoque">Qual é a quantidade que você o possui em estoque?</label>
-            <input asp-for="Estoque" class="form-control col-4" placeholder="Estoque" />
+            <input asp-for="Estoque" name="Estoque" class="form-control col-4" placeholder="Estoque" />
             <span asp-validation-for="Estoque" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Preco">Qual é o preço para locação por unidade?</label>
-            <input asp-for="Preco" class="form-control col-4" placeholder="Preço" />
+            <input asp-for="Preco" name="Preco" class="form-control col-4" placeholder="Preço" />
             <span asp-validation-for="Preco" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Cadastro">Data em que o Item foi cadastrado!</label>
-            <input asp-for="Cadastro" class="form-control col-4" placeholder="@DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")" disabled />
-            <span asp-validation-for="Cadastro" class="text-danger"></span>
-        </div>
-        <div class="form-group">
             <label asp-for="Ativo">Situação atual do Item</label>
-            <select asp-for="Ativo" class="form-control col-4">
+            <select asp-for="Ativo" name="Ativo" class="form-control col-4">
                 <option value="True" selected>Ativo</option>
                 <option value="False">Inativo</option>
             </select>
+        </div>
+        <div class="form-group invisible">
+            <label asp-for="Cadastro">Data em que o Item foi cadastrado!</label>
+            <input asp-for="Cadastro" name="Cadastro" class="form-control col-4" disabled />
+            <span asp-validation-for="Cadastro" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar Item</button>
     </form>
