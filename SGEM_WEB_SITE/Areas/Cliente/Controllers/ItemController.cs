@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SGEM_WEB_SITE.Areas.Item.Models;
+using SGEM_WEB_SITE.Libraries.Lang;
 
 namespace SGEM_WEB_SITE.Areas.Item.Controllers
 {
-    [Area("Item")]
+    [Area("Cliente")]
     public class ItemController : Controller
     {
         private static readonly HttpClient client = new HttpClient();
@@ -45,19 +46,19 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
                 //Verificando se item foi salvo no banco de dados
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    TempData["MSG_SUCESSO"] = "Registro salvo com sucesso.";
+                    TempData["MSG_SUCESSO"] = Message.MSG_SUCESSO_001;
 
                     return RedirectToAction(nameof(CadastrarItem));
                 }
                 else
                 {
-                    TempData["MSG_ERRO"] = "Não foi possível acessar base de dados. Mensagem: " + responseMessage.StatusCode.ToString();
+                    TempData["MSG_ERRO"] = Message.MSG_ERRO_001 + responseMessage.StatusCode.ToString();
                     return RedirectToAction(nameof(CadastrarItem));
                 }
             }
             catch (Exception e)
             {
-                TempData["MSG_ERRO"] = "Falha ao inserir novo item na base de dados. Mensagem: " + e.Message;
+                TempData["MSG_ERRO"] = Message.MSG_ERRO_001 + e.Message;
                 return RedirectToAction(nameof(CadastrarItem));
             }
         }
