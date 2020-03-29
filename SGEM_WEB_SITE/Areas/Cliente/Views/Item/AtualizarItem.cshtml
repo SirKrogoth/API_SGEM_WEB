@@ -5,20 +5,6 @@
     ViewData["Title"] = "SGEM - Cadastro de Item";
 }
 
-<script>
-    function somenteNumeros(num)
-    {
-        var er = /[^0-9.,]/;
-        er.lastIndex = 0;
-        var campo = num;
-        if (er.test(campo.value))
-        {
-            campo.value = "";
-        }
-    }
-</script>
-
-
 <form method="post" class="col-6 center" style="margin-top: 5%" action="">
 
     @if (TempData["MSG_SUCESSO"] != null)
@@ -35,7 +21,9 @@
     <div class="form-group">
         <label asp-for="Codigo"></label>
         <input asp-for="Codigo" name="Codigo" class="form-control col-4" placeholder="0" disabled />
+        <span asp-validation-for="Codigo" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Descricao" for="Descricao">Digite aqui uma breve descrição do Item</label>
         <input asp-for="Descricao" name="Descricao" class="form-control" placeholder="Descrição do Item" maxlength="100" id="Descricao" required />
@@ -43,12 +31,11 @@
 
     <div class="form-group">
         <label asp-for="Estoque">Qual é a quantidade que você o possui em estoque?</label>
-        <input asp-for="Estoque" onkeyup="somenteNumeros(this);" name="Estoque" class="form-control col-4" placeholder="Estoque" required />
+        <input asp-for="Estoque" name="Estoque" class="form-control col-4" placeholder="Estoque" required />
     </div>
-    
     <div class="form-group">
         <label asp-for="Preco">Qual é o preço para locação por unidade?</label>
-        <input asp-for="Preco" onkeyup="somenteNumeros(this);" name="Preco" class="form-control col-4" placeholder="Preço" required />
+        <input asp-for="Preco" name="Preco" class="form-control col-4" placeholder="Preço" required />
     </div>
     <div class="form-group">
         <label asp-for="Ativo">Situação atual do Item</label>
@@ -57,7 +44,7 @@
             <option value="False">Inativo</option>
         </select>
     </div>
-    <div class="form-group invisible">
+    <div class="form-group">
         <label asp-for="Cadastro">Data em que o Item foi cadastrado!</label>
         <input asp-for="Cadastro" name="Cadastro" class="form-control col-4" disabled />
     </div>
