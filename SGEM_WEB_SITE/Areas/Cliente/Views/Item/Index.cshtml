@@ -1,39 +1,60 @@
-﻿@model SGEM_WEB_SITE.Areas.Item.Models.ItemObj;
+﻿@model List<SGEM_WEB_SITE.Areas.Item.Models.ItemObj>;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Itens";
 }
 
-<h1>Cadastro de Item</h1>
+<div class="table-responsive col-10 center" style="margin-top: 2%;">
+    <form>
+        <label for="PesquisaItem">Pesquisar</label>
+        <div class="form-inline">
+            <input type="text" class="form-control col-6" id="txtPesquisaItem" aria-describedby="pesquisaItem" placeholder="Pesquise seu item aqui..." />
+            <select class="custom-select col-2" id="selCriterioPesquisa" aria-label="Critério de Pesquisa">
+                <option value="Codigo">Código</option>
+                <option value="Descricao" selected>Descrição</option>
+                <option value="Estoque">Estoque</option>
+                <option value="Cadastro">Cadastro</option>
+                <option value="Preco">Preço</option>
+                <option value="Ativo">Ativo</option>
+            </select>
+            <button type="button" class="btn btn-primary col-2">Pesquisar</button>
+        </div>
+        <small id="pesquisaItemHelp" class="form-text text-muted">Caso você não esteja encontrando seu item, informe algo que o itentifique e deixe o resto conosco.</small>
+    </form>                                               
+</div>
 
-<div class="table-responsive">
-    <table class="table table-bordered">
+<div class="table-responsive col-10 center" style="margin-top: 2%;">
+
+    <h1>Listagem de Itens Cadastrados</h1>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Código</th>
-                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Cadastro</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Ativo</th>
+                <th scope="col">Ação</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">@Model.Codigo</th>
-                <td>@Model.Descricao</td>
-                <td>
-                        @*@if(categoria.CategoriaPaiId != null)
-                            {
-                                <span>@categoria.CategoriaID.Id - @categoria.CategoriaID.Nome</span>
-                            }
-                            else
-                            {
-                                <span>--</span>
-                            }*@
-                    TESTE
-                </td>
-                @*<td>
-                    <a asp-action="Atualizar" asp-route-id="@categoria.Id" class="btn btn-secondary">Atualizar</a>
-                    <a asp-action="Excluir" asp-route-id="@categoria.Id" class="btn btn-danger">Excluir</a>
-                </td>*@
-            </tr>
+            @foreach (SGEM_WEB_SITE.Areas.Item.Models.ItemObj itemObj in Model)
+            {
+                <tr>
+                    <td>@itemObj.Codigo</td>
+                    <td>@itemObj.Descricao</td>
+                    <td>@itemObj.Estoque</td>
+                    <td>@itemObj.Cadastro.ToShortDateString()</td>
+                    <td>@itemObj.Preco.ToString("C")</td>
+                    <td><input type="checkbox" aria-label="Ativo" checked="@itemObj.Ativo" disabled></td>
+                    <td>
+                        <button type="button" class="btn btn-success">Editar</button>
+                        <button type="button" class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

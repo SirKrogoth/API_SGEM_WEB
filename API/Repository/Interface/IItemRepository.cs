@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace API.Repository.Interface
 {
@@ -10,7 +11,6 @@ namespace API.Repository.Interface
     {
         Item Create(Item item);
         Item FindById(long id);
-        List<Item> FindAll();
         Item Update(Item item);
         void Delete(long id);
     }

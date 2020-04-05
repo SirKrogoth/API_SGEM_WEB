@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Business.Interface;
 using API.Data.VO;
+using API.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace API.Controllers
 {
@@ -21,14 +23,11 @@ namespace API.Controllers
             _itemBusiness = itemBusiness;
         }
 
-        // GET: api/Item
-        [HttpGet]
-        [ProducesResponseType((200), Type = typeof(List<ItemVO>))]
         [ProducesResponseType((204))]
         [ProducesResponseType((400))]
         [ProducesResponseType((401))]
         [ProducesResponseType((403))]
-        public ActionResult Get()
+        public IActionResult Index()
         {
             return Ok(_itemBusiness.FindAll());
         }

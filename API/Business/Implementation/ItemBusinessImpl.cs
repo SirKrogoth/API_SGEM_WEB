@@ -7,50 +7,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace API.Business.Implementation
 {
     public class ItemBusinessImpl : IItemBusiness
     {
-        private IRepository<Item> _repository;
+        private IRepository<Item> _genericrepository;
         private readonly ItemConverter _converter;
 
         public ItemBusinessImpl(IRepository<Item> repository)
         {
-            _repository = repository;
+            _genericrepository = repository;
             _converter = new ItemConverter();
         }
 
         public ItemVO Create(ItemVO itemVO)
         {
             var itemEntity = _converter.Parce(itemVO);
-            itemEntity = _repository.Create(itemEntity);
+            itemEntity = _genericrepository.Create(itemEntity);
 
             return _converter.Parce(itemEntity);
-        }
-
-        public List<ItemVO> FindAll()
-        {
-            return _converter.ParceList(_repository.FindAll());
         }
 
         public ItemVO Update(ItemVO itemVO)
         {
             var itemEntity = _converter.Parce(itemVO);
 
-            itemEntity = _repository.Update(itemEntity);
+            itemEntity = _genericrepository.Update(itemEntity);
 
             return _converter.Parce(itemEntity);
         }
 
         public void Delete(long codigo)
         {
-            _repository.Delete(codigo);
+            _genericrepository.Delete(codigo);
         }
 
         public ItemVO FindById(long codigo)
         {
-            return _converter.Parce(_repository.FindById(codigo));
+            return _converter.Parce(_genericrepository.FindById(codigo));
+        }
+
+        public List<ItemVO> FindAll()
+        {
+            return _converter.ParceList(_genericrepository.FindAll());
         }
     }
 }
