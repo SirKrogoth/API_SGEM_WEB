@@ -120,7 +120,13 @@
   <data name="MSG_ERRO_001" xml:space="preserve">
     <value>Não foi possível acessar a base de dados. Mensagem: {0}</value>
   </data>
+  <data name="MSG_ERRO_002" xml:space="preserve">
+    <value>Ocorreu algum erro ao realizar o procedimento desejado.</value>
+  </data>
   <data name="MSG_SUCESSO_001" xml:space="preserve">
     <value>O Cadastro foi realizado com sucesso!</value>
+  </data>
+  <data name="MSG_SUCESSO_002" xml:space="preserve">
+    <value>O Cadastro foi atualizado com sucesso!</value>
   </data>
 </root>

@@ -18,7 +18,7 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
     [Area("Cliente")]
     public class ItemController : Controller
     {
-        private static readonly HttpClient client = new HttpClient();   
+        private static HttpClient client;   
         
         public async Task<IActionResult> Index()
         {
@@ -26,13 +26,17 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
             {
                 List<ItemObj> listaItemObj = new List<ItemObj>();
 
-                client.BaseAddress = new Uri("http://localhost:58722");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                if(client == null)
+                {
+                    client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.BaseAddress = new Uri("http://localhost:58722");
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }                
 
                 var responseMessage = await client.GetStringAsync($"/api/Item//v1");
                 
-                List<ItemObj> lista = JsonConvert.DeserializeObject<List<ItemObj>>(responseMessage);
+                List<ItemObj> lista = JsonConvert.DeserializeObject<List<ItemObj>>(responseMessage);            
 
                 return View(lista);
             }
@@ -65,9 +69,97 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
             return View();
         }
 
-        public IActionResult AtualizarItem()
+        /**[HttpGet]
+        public async Task<IActionResult> Get(long codigo)
         {
-            return View();
+            var itemObj = "";
+            client.BaseAddress = new Uri("http://localhost:58722");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage responseMessage = await client.GetAsync("/api/Item//v1/consultarItemPorCodigo/" + codigo);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                itemObj = await responseMessage.Content.ReadAsStringAsync();
+            }
+
+            return View(itemObj);
+        }
+        **/
+        [HttpGet]
+        public async Task<IActionResult> AtualizarItem(long Codigo)
+        {            
+            try
+            {
+                ItemObj itemObj = new ItemObj();
+
+                //TODO - Criar uma configuração para guardar esta informação                
+                if (client == null)
+                {
+                    client = new HttpClient();
+                    client.BaseAddress = new Uri("http://localhost:58722");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
+                
+                var responseMessage = await client.GetAsync($"/api/Item//v1/consultarItemPorCodigo/" + Codigo);
+
+                if(responseMessage.IsSuccessStatusCode)
+                {
+                    itemObj = await responseMessage.Content.ReadAsAsync<ItemObj>();
+                }
+
+                return View(itemObj);
+
+                
+            }
+            catch (Exception e)
+            {
+                TempData["MSG_ERRO"] = Message.MSG_ERRO_001 + e.Message;
+                return RedirectToAction(nameof(AtualizarItem));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AtualizarItem([FromForm] ItemObj itemObj)
+        {
+            try
+            {
+                //TODO - Criar uma configuração para guardar esta informação                
+                if (client == null)
+                {
+                    client = new HttpClient();
+                    client.BaseAddress = new Uri("http://localhost:58722");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
+
+                HttpResponseMessage response = await client.PutAsJsonAsync($"/api/Item/v1/" + itemObj.Codigo, itemObj);
+
+                response.EnsureSuccessStatusCode();
+
+                if(response.IsSuccessStatusCode)
+                {
+                    //Descerializando
+                    itemObj = await response.Content.ReadAsAsync<ItemObj>();
+                    
+                    TempData["MSG_SUCESSO"] = Message.MSG_SUCESSO_002;
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    TempData["MSG_ERRO"] = Message.MSG_ERRO_002 + response.StatusCode.ToString();
+                    return RedirectToAction(nameof(Index));
+                }
+               
+            }
+            catch (Exception e)
+            {
+                TempData["MSG_ERRO"] = Message.MSG_ERRO_001 + e.Message;
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
@@ -104,25 +196,7 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
                 TempData["MSG_ERRO"] = Message.MSG_ERRO_001 + e.Message;
                 return RedirectToAction(nameof(CadastrarItem));
             }
-        }       
-
-        [HttpGet]
-        public async Task<IActionResult> Get(long codigo)
-        {
-            var itemObj = "";
-            client.BaseAddress = new Uri("http://localhost:58722");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage responseMessage = await client.GetAsync("/api/Item//v1/consultarItemPorCodigo/" + codigo);
-
-            if(responseMessage.IsSuccessStatusCode)
-            {
-                itemObj = await responseMessage.Content.ReadAsStringAsync();
-            }
-
-            return View(itemObj);
-        }
+        }      
 
         [HttpPost]
         public IActionResult Get()

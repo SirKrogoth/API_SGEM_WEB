@@ -4,57 +4,75 @@
     ViewData["Title"] = "Itens";
 }
 
-<div class="table-responsive col-10 center" style="margin-top: 2%;">
-    <form>
-        <label for="PesquisaItem">Pesquisar</label>
-        <div class="form-inline">
-            <input type="text" class="form-control col-6" id="txtPesquisaItem" aria-describedby="pesquisaItem" placeholder="Pesquise seu item aqui..." />
-            <select class="custom-select col-2" id="selCriterioPesquisa" aria-label="Critério de Pesquisa">
-                <option value="Codigo">Código</option>
-                <option value="Descricao" selected>Descrição</option>
-                <option value="Estoque">Estoque</option>
-                <option value="Cadastro">Cadastro</option>
-                <option value="Preco">Preço</option>
-                <option value="Ativo">Ativo</option>
-            </select>
-            <button type="button" class="btn btn-primary col-2">Pesquisar</button>
-        </div>
-        <small id="pesquisaItemHelp" class="form-text text-muted">Caso você não esteja encontrando seu item, informe algo que o itentifique e deixe o resto conosco.</small>
-    </form>                                               
-</div>
+    <div class="table-responsive col-10 center" style="margin-top: 2%;">
+
+        @if (TempData["MSG_SUCESSO"] != null)
+        {
+            <p class="alert alert-success">@TempData["MSG_SUCESSO"].ToString()</p>
+        }
+        else if (TempData["MSG_ERRO"] != null)
+        {
+            <p class="alert alert-danger">@TempData["MSG_ERRO"].ToString()</p>
+        }
+
+        <form>
+            <label for="PesquisaItem">Pesquisar</label>
+            <div class="form-inline">
+                <input type="text" class="form-control col-6" id="txtPesquisaItem" aria-describedby="pesquisaItem" placeholder="Pesquise seu item aqui..." />
+                <select class="custom-select col-2" id="selCriterioPesquisa" aria-label="Critério de Pesquisa">
+                    <option value="Codigo">Código</option>
+                    <option value="Descricao" selected>Descrição</option>
+                    <option value="Estoque">Estoque</option>
+                    <option value="Cadastro">Cadastro</option>
+                    <option value="Preco">Preço</option>
+                    <option value="Ativo">Ativo</option>
+                </select>
+                <button type="button" class="btn btn-primary col-2">Pesquisar</button>
+            </div>
+            <small id="pesquisaItemHelp" class="form-text text-muted">Caso você não esteja encontrando seu item, informe algo que o itentifique e deixe o resto conosco.</small>
+        </form>
+    </div>
 
 <div class="table-responsive col-10 center" style="margin-top: 2%;">
 
     <h1>Listagem de Itens Cadastrados</h1>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Estoque</th>
-                <th scope="col">Cadastro</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Ativo</th>
-                <th scope="col">Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (SGEM_WEB_SITE.Areas.Item.Models.ItemObj itemObj in Model)
-            {
+    @if (Model.Count > 0)
+    {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@itemObj.Codigo</td>
-                    <td>@itemObj.Descricao</td>
-                    <td>@itemObj.Estoque</td>
-                    <td>@itemObj.Cadastro.ToShortDateString()</td>
-                    <td>@itemObj.Preco.ToString("C")</td>
-                    <td><input type="checkbox" aria-label="Ativo" checked="@itemObj.Ativo" disabled></td>
-                    <td>
-                        <button type="button" class="btn btn-success">Editar</button>
-                        <button type="button" class="btn btn-danger">Excluir</button>
-                    </td>
+                    <th scope="col">Código</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Estoque</th>
+                    <th scope="col">Cadastro</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col">Ação</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (SGEM_WEB_SITE.Areas.Item.Models.ItemObj itemObj in Model)
+                {
+                    <tr>
+                        <td>@itemObj.Codigo</td>
+                        <td>@itemObj.Descricao</td>
+                        <td>@itemObj.Estoque</td>
+                        <td>@itemObj.Cadastro.ToShortDateString()</td>
+                        <td>@itemObj.Preco.ToString("C")</td>
+                        <td><input type="checkbox" aria-label="Ativo" checked="@itemObj.Ativo" disabled /></td>
+                        <td>
+                            <a href="AtualizarItem/?Codigo=@itemObj.Codigo" class="btn btn-success">Editar</a>
+                            <a href="AtualizarItem/?Codigo=@itemObj.Codigo" class="btn btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <span>Nunhum registro encontrado.</span>
+    }
+
 </div>

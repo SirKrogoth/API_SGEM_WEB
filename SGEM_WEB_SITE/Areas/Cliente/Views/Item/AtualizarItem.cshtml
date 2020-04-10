@@ -2,11 +2,22 @@
 
 
 @{
-    ViewData["Title"] = "SGEM - Cadastro de Item";
+    ViewData["Title"] = "SGEM - Atualização de Item";
 }
 
-<form method="post" class="col-6 center" style="margin-top: 5%" action="">
+<script>
+    function somenteNumeros(num) {
+        var er = /[^0-9.,]/;
+        er.lastIndex = 0;
+        var campo = num;
+        if (er.test(campo.value)) {
+            campo.value = "";
+        }
+    }
+</script>
 
+
+<form method="post" class="col-6 center" style="margin-top: 5%" action="">
     @if (TempData["MSG_SUCESSO"] != null)
     {
         <p class="alert alert-success">@TempData["MSG_SUCESSO"].ToString()</p>
@@ -16,37 +27,43 @@
         <p class="alert alert-danger">@TempData["MSG_ERRO"].ToString()</p>
     }
 
-    <h2>Cadastro de Itens</h2>
+    <h2>Atualização de Item</h2>
     <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Codigo"></label>
-        <input asp-for="Codigo" name="Codigo" class="form-control col-4" placeholder="0" disabled />
-        <span asp-validation-for="Codigo" class="text-danger"></span>
-    </div>
-
+    <input type="hidden" asp-for="Codigo" name="Codigo" value="@Model.Codigo"/>
     <div class="form-group">
         <label asp-for="Descricao" for="Descricao">Digite aqui uma breve descrição do Item</label>
-        <input asp-for="Descricao" name="Descricao" class="form-control" placeholder="Descrição do Item" maxlength="100" id="Descricao" required />
+        <input asp-for="Descricao" name="Descricao" class="form-control" value="@Model.Descricao" maxlength="100" id="Descricao" required />
     </div>
 
     <div class="form-group">
         <label asp-for="Estoque">Qual é a quantidade que você o possui em estoque?</label>
-        <input asp-for="Estoque" name="Estoque" class="form-control col-4" placeholder="Estoque" required />
+        <input asp-for="Estoque" onkeyup="somenteNumeros(this);" name="Estoque" class="form-control col-4" value="@Model.Estoque" required />
     </div>
+
     <div class="form-group">
         <label asp-for="Preco">Qual é o preço para locação por unidade?</label>
-        <input asp-for="Preco" name="Preco" class="form-control col-4" placeholder="Preço" required />
+        <input asp-for="Preco" onkeyup="somenteNumeros(this);" name="Preco" class="form-control col-4" value="@Model.Preco" required />
     </div>
     <div class="form-group">
         <label asp-for="Ativo">Situação atual do Item</label>
         <select asp-for="Ativo" name="Ativo" class="form-control col-4">
-            <option value="True" selected>Ativo</option>
-            <option value="False">Inativo</option>
+            @{
+                if (@Model.Ativo == true)
+                {
+                    <option value="True" selected>Ativo</option>
+                    <option value="False">Inativo</option>
+                }
+                else
+                {
+                    <option value="True">Ativo</option>
+                    <option value="False" selected>Inativo</option>
+                }
+            }
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="Cadastro">Data em que o Item foi cadastrado!</label>
-        <input asp-for="Cadastro" name="Cadastro" class="form-control col-4" disabled />
+        <label asp-for="Cadastro">Data de Cadastro: </label>
+        <input asp-for="Cadastro" type="date" name="Cadastro" value="@Model.Cadastro.ToString("yyyy-MM-dd")" readonly/>
     </div>
-    <button type="submit" class="btn btn-primary">Cadastrar Item</button>
+    <button type="submit" class="btn btn-primary">Editar Item</button>
 </form>

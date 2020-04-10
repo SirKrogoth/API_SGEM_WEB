@@ -70,11 +70,29 @@ namespace SGEM_WEB_SITE.Libraries.Lang {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu algum erro ao realizar o procedimento desejado..
+        /// </summary>
+        public static string MSG_ERRO_002 {
+            get {
+                return ResourceManager.GetString("MSG_ERRO_002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O Cadastro foi realizado com sucesso!.
         /// </summary>
         public static string MSG_SUCESSO_001 {
             get {
                 return ResourceManager.GetString("MSG_SUCESSO_001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Cadastro foi atualizado com sucesso!.
+        /// </summary>
+        public static string MSG_SUCESSO_002 {
+            get {
+                return ResourceManager.GetString("MSG_SUCESSO_002", resourceCulture);
             }
         }
     }
