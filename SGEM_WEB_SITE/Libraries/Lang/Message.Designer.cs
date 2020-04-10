@@ -79,6 +79,15 @@ namespace SGEM_WEB_SITE.Libraries.Lang {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu algum erro ao deletar item..
+        /// </summary>
+        public static string MSG_ERRO_003 {
+            get {
+                return ResourceManager.GetString("MSG_ERRO_003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O Cadastro foi realizado com sucesso!.
         /// </summary>
         public static string MSG_SUCESSO_001 {
@@ -93,6 +102,15 @@ namespace SGEM_WEB_SITE.Libraries.Lang {
         public static string MSG_SUCESSO_002 {
             get {
                 return ResourceManager.GetString("MSG_SUCESSO_002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item deletado com sucesso!.
+        /// </summary>
+        public static string MSG_SUCESSO_003 {
+            get {
+                return ResourceManager.GetString("MSG_SUCESSO_003", resourceCulture);
             }
         }
     }

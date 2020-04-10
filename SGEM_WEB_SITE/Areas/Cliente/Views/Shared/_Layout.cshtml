@@ -13,9 +13,40 @@
     <link rel="stylesheet" href="~/resources/lib/bootstrap-ecommerce-uikit/css/ui.css" />
     <link rel="stylesheet" href="~/resources/lib/bootstrap-ecommerce-uikit/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-          crossorigin="anonymous">  
-</head>
+          crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+    <!-- Custom styles for this template -->
+    <link href="./Login_files/signin.css" rel="stylesheet">
 
+    @*<script language="Javascript">
+        function ConfirmarDelete(Codigo, Descricao) {
+            var resposta = confirm("Deseja realmente deletar o item " + Descricao + "?");
+
+            if (resposta == true) {
+                window.location.href = "ExcluirItem/?Codigo=" + Codigo;
+            }
+        }
+    </script>*@
+
+</head>
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -34,12 +65,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-list-ul"></i> Categorias
+                                <i class="fas fa-list-ul"></i> 
+                                Categorias
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="../../Cliente/Item/CadastrarItem">Cadastro de Itens</a>
+                                <a class="dropdown-item" href="#">Cadastro de Itens</a>
+                                <a class="dropdown-item" href="#">Listagem de Itens</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
@@ -48,10 +80,8 @@
                             <a class="nav-link" href="#"><i class="far fa-address-book"></i> Contato </a>
                         </li>
                     </ul>
+
                     <form class="form-inline my-2 my-lg-0">
-
-
-
                         <input class="form-control mr-sm-2" type="search" placeholder="palavra" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisa</button>
                         <a class="nav-link" href="#"><i class="fas fa-user-alt"></i> Login</a>

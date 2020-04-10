@@ -203,5 +203,37 @@ namespace SGEM_WEB_SITE.Areas.Item.Controllers
         {
             return View();
         }        
+
+        [HttpGet]
+        public async Task<IActionResult> DeletarItem(long codigo)
+        {
+            try
+            {
+                if (client == null)
+                {
+                    client = new HttpClient();
+                    client.BaseAddress = new Uri("http://localhost:58722");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
+
+                var responseMessage = await client.GetAsync($"/api/Item//v1/deletarItemPorCodigo/" + codigo);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    TempData["MSG_SUCESSO"] = Message.MSG_SUCESSO_003;
+                }
+                else
+                    TempData["MSG_ERRO"] = Message.MSG_ERRO_003;
+
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception e)
+            {
+                TempData["MSG_ERRO"] = Message.MSG_ERRO_003 + " Mensagem: " + e.Message;
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

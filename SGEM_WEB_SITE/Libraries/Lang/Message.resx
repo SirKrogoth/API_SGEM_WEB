@@ -123,10 +123,16 @@
   <data name="MSG_ERRO_002" xml:space="preserve">
     <value>Ocorreu algum erro ao realizar o procedimento desejado.</value>
   </data>
+  <data name="MSG_ERRO_003" xml:space="preserve">
+    <value>Ocorreu algum erro ao deletar item.</value>
+  </data>
   <data name="MSG_SUCESSO_001" xml:space="preserve">
     <value>O Cadastro foi realizado com sucesso!</value>
   </data>
   <data name="MSG_SUCESSO_002" xml:space="preserve">
     <value>O Cadastro foi atualizado com sucesso!</value>
+  </data>
+  <data name="MSG_SUCESSO_003" xml:space="preserve">
+    <value>Item deletado com sucesso!</value>
   </data>
 </root>
