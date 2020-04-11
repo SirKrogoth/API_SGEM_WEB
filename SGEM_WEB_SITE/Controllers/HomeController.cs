@@ -12,5 +12,10 @@ namespace SGEM_WEB_SITE.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
     }
 }
