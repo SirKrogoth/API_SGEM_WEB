@@ -23,6 +23,8 @@ namespace API.Model.Context
 
         public DbSet<Item> Item { get; set; }
         public DbSet<ItemLog> ItemLog { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Colaborador> Colaborador { get; set; }
 
     }
 }

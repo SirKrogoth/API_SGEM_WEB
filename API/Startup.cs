@@ -50,6 +50,7 @@ namespace API
 
             services.AddScoped<IItemBusiness, ItemBusinessImpl>();
             services.AddScoped<IItemLog, ItemLogRepository>();
+            services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
