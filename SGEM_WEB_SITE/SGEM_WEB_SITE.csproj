@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\resources\imgPadrao\ks001.jpg" />
     <None Include="wwwroot\resources\imgPadrao\ks002.jpg" />
     <None Include="wwwroot\resources\imgPadrao\ks003.jpg" />
